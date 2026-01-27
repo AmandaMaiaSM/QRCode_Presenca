@@ -1,0 +1,153 @@
+:root {
+  --color-bg: #e0e2dd;
+  --color-primary: #c9a416;
+  --color-secondary: #a8a578;
+  --color-accent: #8d4820;
+  --color-text: #2e2e2e;
+  --color-white: #ffffff;
+}
+
+/* Container geral */
+.login-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-container: center;
+  justify-content: space-between;
+  margin-left: 100px;
+  margin-right:100px;
+  background-color: var(--color-bg);
+
+}
+
+/* Lado esquerdo */
+.login-left {
+  flex: 1;
+  background-color: var(--color-secondary);
+  height: 460px;
+  color: white;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius:20px;
+  overflow: hiddern;
+  
+}
+
+.login-logo {
+  width: 560px;
+  margin-bottom: 40px;
+}
+
+.login-left h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+  text-align: center;
+
+  
+}
+
+.login-left p {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* Lado direito */
+.login-right {
+  flex: 1;
+  background-color: var(  --color-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 460px;
+  padding: 60px 30px;
+  border-radius:20px;
+  overflow: hiddern;
+  
+
+}
+
+.login-right h2 {
+  margin-bottom: 30px;
+  color: var(--color-text);
+}
+
+/* Formulário */
+.login-form {
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.login-form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.login-form input {
+  margin-top: 6px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Opções */
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 30px;
+}
+
+.login-options a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* Botão */
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-login:hover {
+  background-color: var(--color-secondary);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .login-left {
+    align-items: center;
+    text-align: center;
+  }
+
+  .login-right {
+    padding: 40px 20px;
+  }
+}

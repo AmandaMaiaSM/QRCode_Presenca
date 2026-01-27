@@ -1,0 +1,187 @@
+:root {
+  --color-bg: #e0e2dd;
+  --color-primary: #c9a416;
+  --color-secondary: #a8a578;
+  --color-accent: #8d4820;
+  --color-text: #2e2e2e;
+  --color-white: #ffffff;
+}
+
+/* Container principal */
+.start-container {
+  background-color: var(--color-bg);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+/* Header */
+.header {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid var(--color-accent);
+  padding: 40px 120px;
+}
+
+/* Conteúdo */
+.hero{
+  flex: 1;
+  display: flex;                /* ativa flex */
+  align-items: center;          /* alinha verticalmente */
+  justify-content: space-between;
+  padding: 40px 120px;
+  gap: 40px;
+}
+.hero-image {
+  flex: 1;                       /* cada coluna ocupa 1/3 */
+  display: flex;
+  align-items: center;
+}
+
+.hero-image:first-child {
+  justify-content: flex-start;   /* imagem esquerda */
+}
+
+.hero-image:last-child {
+  justify-content: flex-end;     /* imagem direita */
+}
+
+.hero-image img {
+  max-width: 320px;
+  width: 100%;
+}
+.hero-content {
+  flex: 1;                       /* coluna central */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px; 
+}
+.phone-img {
+  max-width: 300px;
+  width: 100%;
+}
+
+
+/*imagens*/
+.logo-img {
+  width: 260px;
+  display: flex;
+  justify-content: start;
+}
+.hero-img {
+  width:60px;
+
+  display: flex;
+  justify-content: end;
+}
+
+/* Conteúdo central */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: var(--color-accent);
+  margin-bottom: 16px;
+  font-size: 32px;
+  margin-bottom: 10px;
+
+}
+
+h2 {
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: normal;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+/* Botão */
+.btn-start {
+  margin-top: 64px;
+  padding: 14px 48px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-start:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
+  
+}
+.btn-header {
+  background-color: var(--color-primary);
+  border: none;
+  color: white;
+  padding: 8px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-header:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
+}
+
+/*Fonte*/
+.title-highlight{
+  color: var(--color-accent);
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+/* Footer */
+.footer {
+  width: 100%;
+  padding: 20px 0 30px;
+  font-size: 14px;
+  color: var(--color-accent);
+  border-top: 1px solid var(--color-accent);
+}
+
+@media (max-width: 768px) {
+
+  .hero {
+    flex-direction: column;   /* quebra as colunas */
+    padding: 20px;
+    gap: 24px;
+  }
+
+  .hero-image {
+    justify-content: center;  /* centraliza imagens */
+  }
+
+  .hero-image img {
+    max-width: 220px;
+  }
+
+  .hero-content h1 {
+    font-size: 26px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+}
