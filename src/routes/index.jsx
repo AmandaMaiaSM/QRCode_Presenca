@@ -13,6 +13,7 @@ import EsqueciSenha from "../pages/EsqueciSenha";
 export default function AppRoutes() {
   return (
     <Routes>
+      <Route path="/" element={<MainPage />} />
       <Route path="/mainPage" element={<MainPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
