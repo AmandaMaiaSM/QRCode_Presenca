@@ -1,18 +1,47 @@
-# React + Vite
+# QR Presença
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O **QR Presença** é uma aplicação web desenvolvida em **React** com o objetivo de facilitar o controle de presença em eventos por meio da leitura de **QR Code**.
 
-Currently, two official plugins are available:
+## Sobre o projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A proposta do QR Presença é permitir que cada evento criado pelo usuário possua um **QR Code único**.  
+Esse QR Code será disponibilizado aos participantes, que ao escaneá-lo poderão registrar sua presença preenchendo um formulário simples.
 
-## React Compiler
+As informações coletadas incluem:
+- Nome completo
+- E-mail
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Ao final do evento, o sistema consolida os dados e possibilita a **geração de uma planilha (CSV/Excel)** com a lista de presença.
 
-Note: This will impact Vite dev & build performances.
+## Objetivos principais
 
-## Expanding the ESLint configuration
+- Criar eventos com QR Code exclusivo
+- Registrar presença de participantes via escaneamento
+- Armazenar dados de presença de forma organizada
+- Gerar planilha de presença para controle e relatórios
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tecnologias utilizadas
+
+- React
+- Vite
+- React Router DOM
+- CSS puro (com variáveis de tema)
+- Geração e leitura de QR Code (em desenvolvimento)
+
+## Status do projeto
+
+**Em desenvolvimento**  
+Atualmente o projeto está focado na construção do front-end e na estrutura das páginas.
+
+--- OBS--
+Projeto desenvolvido com fins acadêmicos e de aprendizado, simulando um sistema real de controle de presença para eventos.
+
+## Telas 
+### Tela incial 
+<img width="1919" height="1085" alt="image" src="https://github.com/user-attachments/assets/f8fe996e-9ca4-43b4-9cd6-2869d691d274" />
+### Tela Login
+<img width="1919" height="1033" alt="image" src="https://github.com/user-attachments/assets/f08f4308-56fd-47cb-94b1-885986b6c040" />
+<img width="1919" height="1053" alt="image" src="https://github.com/user-attachments/assets/6d030111-6044-4c18-9ba8-c5b4d75e9caa" />
+
+
+
