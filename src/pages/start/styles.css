@@ -10,133 +10,38 @@
 /* Container principal */
 .start-container {
   background-color: var(--color-bg);
-  height: 100vh;
+  min-height: 100vh; /* Use min-height para garantir que cubra a tela */
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  text-align: center;
+  justify-content: space-between; /* Garante que footer vá pro final */
 }
 
-/* Header */
-.header {
-  height: 70px;
+/* --- HEADER CORRIGIDO --- */
+.header-start {
+  height: 90px;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  border-bottom: 1px solid var(--color-accent);
-  padding: 40px 120px;
-}
-
-/* Conteúdo */
-.hero{
-  flex: 1;
-  display: flex;                /* ativa flex */
-  align-items: center;          /* alinha verticalmente */
-  justify-content: space-between;
-  padding: 40px 120px;
-  gap: 40px;
-}
-.hero-image {
-  flex: 1;                       /* cada coluna ocupa 1/3 */
-  display: flex;
-  align-items: center;
-}
-
-.hero-image:first-child {
-  justify-content: flex-start;   /* imagem esquerda */
-}
-
-.hero-image:last-child {
-  justify-content: flex-end;     /* imagem direita */
-}
-
-.hero-image img {
-  max-width: 320px;
-  width: 100%;
-}
-.hero-content {
-  flex: 1;                       /* coluna central */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 10px; 
-}
-.phone-img {
-  max-width: 300px;
-  width: 100%;
-}
-
-
-/*imagens*/
-.logo-img {
-  width: 260px;
-  display: flex;
-  justify-content: start;
-}
-.hero-img {
-  width:60px;
-
-  display: flex;
-  justify-content: end;
-}
-
-/* Conteúdo central */
-.content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-h1 {
-  color: var(--color-accent);
-  margin-bottom: 16px;
-  font-size: 32px;
-  margin-bottom: 10px;
-
-}
-
-h2 {
-  color: var(--color-text);
-  font-size: 18px;
-  font-weight: normal;
-  margin-bottom: 32px;
-  line-height: 1.5;
-}
-
-/* Botão */
-.btn-start {
-  margin-top: 64px;
-  padding: 14px 48px;
-  font-size: 18px;
-  font-weight: bold;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-start:hover {
-  background-color: var(--color-secondary);
-  transform: translateY(-2px);
   
+  /* Isso joga a logo p/ esquerda e botão p/ direita */
+  justify-content: space-between; 
+  
+  border-bottom: 1px solid var(--color-accent);
+  padding: 0 120px; /* Ajustei o padding para alinhar melhor */
+  background-color: transparent;
 }
+
+/* Botão do Header */
 .btn-header {
   background-color: var(--color-primary);
   border: none;
   color: white;
-  padding: 8px 22px;
-  border-radius: 6px;
+  padding: 10px 24px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 16px;
   transition: all 0.3s ease;
 }
 
@@ -145,43 +50,131 @@ h2 {
   transform: translateY(-2px);
 }
 
-/*Fonte*/
-.title-highlight{
+/* Imagens */
+.logo-img {
+  width: 200px; /* Reduzi um pouco para ficar mais elegante */
+  object-fit: contain;
+}
+
+/* HERO Section */
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 120px;
+  gap: 40px;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.hero-image:first-child {
+  justify-content: flex-start;
+}
+
+.hero-image:last-child {
+  justify-content: flex-end;
+}
+
+.hero-image img {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+}
+
+/* Conteúdo Central */
+.hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+h1 {
   color: var(--color-accent);
-  font-size: 28px;
-  line-height: 1.3;
+  font-size: 32px;
+  margin: 0;
+}
+
+.title-highlight {
+  color: var(--color-accent);
+  font-size: 48px; /* Aumentei para destaque */
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.hero-content p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-text);
+  max-width: 400px;
+}
+
+/* Botão Iniciar (Hero) */
+.btn-start {
+  margin-top: 32px;
+  padding: 16px 60px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-start:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 /* Footer */
 .footer {
   width: 100%;
-  padding: 20px 0 30px;
+  padding: 20px 0;
+  text-align: center; /* Centraliza o texto */
   font-size: 14px;
   color: var(--color-accent);
   border-top: 1px solid var(--color-accent);
+  background-color: var(--color-bg);
+}
+
+/* RESPONSIVO */
+@media (max-width: 1024px) {
+  .header-start, .hero {
+    padding: 20px 40px;
+  }
 }
 
 @media (max-width: 768px) {
-
-  .hero {
-    flex-direction: column;   /* quebra as colunas */
+  .header-start {
     padding: 20px;
-    gap: 24px;
+  }
+  
+  .hero {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 40px;
   }
 
   .hero-image {
-    justify-content: center;  /* centraliza imagens */
+    justify-content: center !important;
   }
 
   .hero-image img {
-    max-width: 220px;
+    max-width: 200px;
   }
 
-  .hero-content h1 {
-    font-size: 26px;
-  }
-
-  .hero-content p {
-    font-size: 16px;
+  .title-highlight {
+    font-size: 36px;
   }
 }

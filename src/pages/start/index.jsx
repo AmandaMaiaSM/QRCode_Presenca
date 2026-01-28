@@ -1,11 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 import qrCodeImg from "../../assets/QRcode02.png";
 import phoneImg from "../../assets/maocelular.png";
 import listImg from "../../assets/list.png";
-
-
 import "./styles.css";
 
 export function MainPage() {
@@ -14,22 +11,19 @@ export function MainPage() {
   return (
     <div className="start-container">
 
-      {/* HEADER */}
-      <header className="header">
+      {/* HEADER - Mudei a classe aqui para 'header-start' */}
+      <header className="header-start">
         <img src={qrCodeImg} alt="QR Presença" className="logo-img" />
         <button 
-        className="btn-header"
-        onClick={() => navigate("/login")}
-
+          className="btn-header"
+          onClick={() => navigate("/login")}
         >
             Iniciar
         </button>
-
       </header>
 
       {/* HERO */}
       <section className="hero">
-
         {/* Imagem esquerda */}
         <div className="hero-image">
           <img src={phoneImg} alt="Check-in com QR Code" className="phone-img" />
@@ -57,7 +51,6 @@ export function MainPage() {
         <div className="hero-image">
           <img src={listImg} alt="Lista de presença" />
         </div>
-
       </section>
 
       {/* FOOTER */}

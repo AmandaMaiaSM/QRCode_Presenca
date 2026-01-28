@@ -8,11 +8,12 @@ import QRCodePage from "../pages/QRCodePage";
 import CheckIn from "../pages/CheckIn";
 import Login from "../pages/Login";
 import { MainPage } from "../pages/start";
+import EsqueciSenha from "../pages/EsqueciSenha";
 
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
+      <Route path="/mainPage" element={<MainPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/eventos" element={<Events />} />
@@ -20,6 +21,7 @@ export default function AppRoutes() {
       <Route path="/eventos/:id" element={<EventDetails />} />
       <Route path="/eventos/:id/qrcode" element={<QRCodePage />} />
       <Route path="/checkin/:eventId" element={<CheckIn />} />
+      <Route path="/esqueci-senha" element={<EsqueciSenha />} />
       <Route path="*" element={<div>404 - Página não encontrada</div>} />
 
     </Routes>
