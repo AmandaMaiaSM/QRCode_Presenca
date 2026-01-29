@@ -5,7 +5,7 @@ import Events from "../pages/Events";
 import CreateEvent from "../pages/CreateEvent";
 import EventDetails from "../pages/EventDetails";
 import QRCodePage from "../pages/QRCodePage";
-import CheckIn from "../pages/CheckIn";
+import Config from "../pages/Config";
 import Login from "../pages/Login";
 import { MainPage } from "../pages/start";
 import EsqueciSenha from "../pages/EsqueciSenha";
@@ -21,7 +21,7 @@ export default function AppRoutes() {
       <Route path="/eventos/novo" element={<CreateEvent />} />
       <Route path="/eventos/:id" element={<EventDetails />} />
       <Route path="/eventos/:id/qrcode" element={<QRCodePage />} />
-      <Route path="/checkin/:eventId" element={<CheckIn />} />
+      <Route path="/config/:eventId" element={<Config />} />
       <Route path="/esqueci-senha" element={<EsqueciSenha />} />
       <Route path="*" element={<div>404 - Página não encontrada</div>} />
 

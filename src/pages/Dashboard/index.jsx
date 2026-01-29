@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import butLogout from "../../assets/config.png";
+import butSair from "../../assets/sair.png";
+import butMylistEventos from "../../assets/lista-de-controle.png";
+import butCreatEventos from "../../assets/mais.png";
+import butDashboard from "../../assets/painel-de-controle.png";
+import menuImg from "../../assets/menu.png";
 import "./styles.css";
 
 //import logoImg from "../../assets/QRcode02.png"; 
 
 export default function Dashboard() {
   const navigate = useNavigate();
-
+  const [menuAberto, setMenuAberto] = useState(true);
   // Dados fictícios para visualizar o layout (depois virão do Backend)
   const eventosRecentes = [
     { id: 1, nome: "Treinamento Sefaz - Módulo 1", data: "28/01/2024", status: "Ativo" },
@@ -18,40 +24,48 @@ export default function Dashboard() {
   return (
     <div className="dashboard-container">
       
-      {/* --- (Menu Lateral) --- */}
-      <aside className="sidebar">
-        <div className="sidebar-header" >
-          <img src="../assets/menu.png" alt="Menu" />
-        <h2>QR Presença</h2>
-
+      <aside className={`sidebar ${menuAberto ? "" : "fechada"}`}>
+        
+        <div className="sidebar-header">
+          {/* 4. Adicionar o onClick na imagem */}
+          <img 
+            src={menuImg} 
+            alt="Menu" 
+            className="menu-icon"
+            onClick={() => setMenuAberto(!menuAberto)} 
+          />
+          
+          {/* O texto só aparece se o menu estiver aberto */}
+          <h2 className={!menuAberto ? "escondido" : ""}>QR Presença</h2>
         </div>
 
         <nav className="sidebar-nav">
-          <button className="nav-item active">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            Dashboard
+          <button className="nav-item active" onClick={() => navigate ("/dashboard")}>
+            <img src={butDashboard} alt="Dashboard" className="menu-icon"/>
+            <span className={!menuAberto ? "escondido" : ""}>Dashboard</span>
           </button>
           
-          <button className="nav-item" onClick={() => navigate("/events")}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-            Meus Eventos
+          <button className="nav-item" onClick={() => navigate("/eventos")}>
+            <img src={butMylistEventos} alt="Meus Eventos" className="menu-icon"/>
+            <span className={!menuAberto ? "escondido" : ""}>Meus Eventos</span>
           </button>
 
-          <button className="nav-item" onClick={() => navigate("/create-event")}>
-             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            Criar Evento
+          <button className="nav-item" onClick={() => navigate("/eventos/novo")}>
+             <img src ={butCreatEventos} alt="Criar Evento" className="menu-icon"/>
+             <span className={!menuAberto ? "escondido" : ""}>Criar Evento</span>
           </button>
 
-          <button className="nav-item" onClick={() => navigate("/checkin")}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path></svg>
-            Realizar Check-in
+          <button className="nav-item" onClick={() => navigate("/config/1")}>
+            
+            <img src={butLogout} alt="Configurações" className="menu-icon"/>
+            <span className={!menuAberto ? "escondido" : ""}>Configurações</span>
           </button>
         </nav>
 
         <div className="sidebar-footer">
-          <button className="btn-logout" onClick={() => navigate("/login")}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-            Sair
+          <button className="nav-item" onClick={() => navigate("/mainPage")}>
+            <img src={butSair} alt="Sair" className="menu-icon"/>
+            <span className={!menuAberto ? "escondido" : ""}>Sair</span>
           </button>
         </div>
       </aside>
