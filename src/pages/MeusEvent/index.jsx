@@ -1,16 +1,16 @@
-import React from "react";
-
+import React from "react";  
 import Sidebar from "../../components/Sidebar";
-import "./styles.css";
 
 
-export default function Config() {
+
+
+export default function Events() {
   return (
     <div className="dashboard-container">
       <Sidebar />
       <main className="main-content">
-        <h1>Configurações</h1>
-        <p>Página de configurações</p>
+        <h1>Events Page</h1>
+        <p>Página de eventos</p>
       </main>
     </div>
   );
