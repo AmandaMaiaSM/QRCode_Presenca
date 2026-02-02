@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import MeusEvent from "../pages/MeusEvent";
 import CreateEvent from "../pages/CreateEvent";
-import MyEventDetails from "../pages/MyEventDetails";
+import CheckInPublic from "../pages/CheckInPublic";
 import QRCodePage from "../pages/QRCodePage";
 import Config from "../pages/Config";
 import Login from "../pages/Login";
@@ -19,7 +19,7 @@ export default function AppRoutes() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/meusEventos" element={<MeusEvent />} />
       <Route path="/eventos/novo" element={<CreateEvent />} />
-      <Route path="/myEventDetails" element={<MyEventDetails />} />
+      <Route path="/checkin/:id" element={<CheckInPublic />} />
       <Route path="/eventos/:id/qrcode" element={<QRCodePage />} />
       <Route path="/config/:eventId" element={<Config />} />
       <Route path="/esqueci-senha" element={<EsqueciSenha />} />

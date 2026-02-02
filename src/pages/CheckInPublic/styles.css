@@ -1,0 +1,110 @@
+/* Fundo da página inteira */
+.checkin-container {
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.checkin-container.success {
+  background-color: #e6f4ea; /* Verde clarinho de sucesso */
+}
+
+/* O Cartão Branco Central */
+.checkin-card, .success-card {
+  background-color: white;
+  width: 100%;
+  max-width: 400px; /* Tamanho de um celular */
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* Cabeçalho */
+.checkin-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.checkin-header h2 {
+  color: #c9a416; /* Sua cor primária */
+  margin: 0 0 10px 0;
+}
+
+.checkin-header p {
+  color: #666;
+  margin: 0;
+}
+
+.event-id-badge {
+  display: inline-block;
+  background-color: #eee;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  margin-top: 10px;
+  color: #888;
+}
+
+/* Formulário */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px; /* Tamanho bom para celular */
+  outline: none;
+  box-sizing: border-box; /* Importante para não quebrar layout */
+}
+
+.form-group input:focus {
+  border-color: #c9a416;
+}
+
+/* Botão */
+.btn-confirm {
+  width: 100%;
+  padding: 15px;
+  background-color: #c9a416;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-confirm:hover {
+  background-color: #b08d0b;
+}
+
+/* Tela de Sucesso */
+.success-card {
+  text-align: center;
+}
+
+.icon-check {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.success-card h1 {
+  color: #2e7d32;
+  font-size: 24px;
+}

@@ -1,16 +1,17 @@
 import React, { useState, useRef } from "react";
-import QRCode from "react-qr-code"; // Gerador do QR Code
-import { toPng } from "html-to-image"; // Para baixar a imagem
+import QRCode from "react-qr-code"; 
+import { toPng } from "html-to-image"; 
+
+import ModalSucessoEvento from "../../components/ModalSucessoEvento";
 import Sidebar from "../../components/Sidebar";
 import "./styles.css";
 
 export default function CreateEvent() {
   const qrCodeRef = useRef(null); 
 
-  // 1. Gerar um ID único assim que a tela abre (Data atual + número aleatório)
-  // Isso garante que o QR Code seja único para este evento específico.
-
+  // --- ESTADOS ---
   const [eventoId] = useState(() => `evt-${Date.now()}-${Math.floor(Math.random() * 1000)}`);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [form, setForm] = useState({
     name: "",
     date: "",
@@ -18,7 +19,12 @@ export default function CreateEvent() {
     location: ""
   });
 
-  // Atualiza os dados do formulário
+  // --- VARIÁVEIS AUXILIARES ---
+  const baseUrl = window.location.origin; 
+  const qrValue = `${baseUrl}/checkin/${eventoId}`;
+
+  // --- FUNÇÕES ---
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -28,15 +34,26 @@ export default function CreateEvent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Evento Criado! O QR Code está pronto para download.");
-    // no Banco de Dados enviando 'form' e 'eventoId'
+
+    const novoEvento = {
+      id: eventoId,
+      nome: form.name,
+      data: form.date,
+      hora: form.time,
+      local: form.location,
+      qrCodeValue: qrValue,
+      participantes: []
+    };
+
+    // Salva no localStorage para aparecer na lista de "Meus Eventos"
+    const eventosSalvos = JSON.parse(localStorage.getItem('meus_eventos') || '[]');
+    localStorage.setItem('meus_eventos', JSON.stringify([...eventosSalvos, novoEvento]));
+
+    setShowSuccessModal(true);
   };
 
-  // Função para baixar o QR Code como imagem PNG
   const downloadQRCode = () => {
-    if (qrCodeRef.current === null) {
-      return;
-    }
+    if (qrCodeRef.current === null) return;
 
     toPng(qrCodeRef.current, { cacheBust: true, backgroundColor: 'white' })
       .then((dataUrl) => {
@@ -50,11 +67,12 @@ export default function CreateEvent() {
       });
   };
 
-  // Os dados que estarão DENTRO do QR Code (ID + Dados do Form)
-  const qrValue = JSON.stringify({
-    id: eventoId,
-    ...form
-  });
+  const scrollToTicket = () => {
+    setShowSuccessModal(false);
+    setTimeout(() => {
+      document.querySelector('.preview-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
 
   return (
     <div className="dashboard-container">
@@ -67,8 +85,6 @@ export default function CreateEvent() {
         </header>
 
         <div className="content-wrapper">
-          
-          {/* --- LADO DO FORMULÁRIO --- */}
           <section className="form-section">
             <form className="create-event-form" onSubmit={handleSubmit}>
               <div className="form-group">
@@ -128,7 +144,6 @@ export default function CreateEvent() {
             </form>
           </section>
 
-          {/* --- LADO DA PRÉ-VISUALIZAÇÃO --- */}
           <aside className="preview-section">
             <h3>Pré-visualização do Ingresso</h3>
             
@@ -147,7 +162,6 @@ export default function CreateEvent() {
                   <p style={{fontSize: '10px', color: '#999', marginTop: '5px'}}>ID: {eventoId}</p>
                 </div>
 
-                {/* Área do QR Code que será baixada */}
                 <div className="qr-container" ref={qrCodeRef}>
                    <QRCode 
                     value={form.name ? qrValue : "vazio"} 
@@ -169,8 +183,13 @@ export default function CreateEvent() {
               </div>
             </div>
           </aside>
-
         </div>
+
+        <ModalSucessoEvento 
+          isOpen={showSuccessModal}
+          onClose={() => setShowSuccessModal(false)}
+          onVerTicket={scrollToTicket}
+        />
       </main>
     </div>
   );
