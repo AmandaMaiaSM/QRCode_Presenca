@@ -1,10 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import Siderbar from "../../components/Sidebar";  
+import Sidebar from "../../components/Sidebar";  
 import "./styles.css";
 
-//import logoImg from "../../assets/QRcode02.png"; 
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ export default function Dashboard() {
     <div className="dashboard-container">
       
       {/* --- MENU LATERAL --- */}
-      <Siderbar/>  
+      <Sidebar/>  
 
       {/* --- CONTEÚDO PRINCIPAL --- */}
       <main className="main-content">

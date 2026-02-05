@@ -10,14 +10,14 @@
 }
 
 .checkin-container.success {
-  background-color: #e6f4ea; /* Verde clarinho de sucesso */
+  background-color: #e6f4ea; 
 }
 
 /* O Cartão Branco Central */
 .checkin-card, .success-card {
   background-color: white;
   width: 100%;
-  max-width: 400px; /* Tamanho de um celular */
+  max-width: 400px; 
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -30,7 +30,7 @@
 }
 
 .checkin-header h2 {
-  color: #c9a416; /* Sua cor primária */
+  color: #c9a416; 
   margin: 0 0 10px 0;
 }
 
@@ -67,9 +67,9 @@
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 10px;
-  font-size: 16px; /* Tamanho bom para celular */
+  font-size: 16px; 
   outline: none;
-  box-sizing: border-box; /* Importante para não quebrar layout */
+  box-sizing: border-box;
 }
 
 .form-group input:focus {

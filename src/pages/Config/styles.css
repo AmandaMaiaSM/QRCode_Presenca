@@ -16,7 +16,7 @@
 /* Layout Geral */
 .settings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Responsivo */
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
   gap: 30px;
   padding-bottom: 40px;
 }
@@ -26,7 +26,7 @@
   background-color: var(--color-white);
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-  overflow: hidden; /* Para o header não sair pra fora */
+  overflow: hidden; 
   border: 1px solid rgba(0,0,0,0.05);
 }
 

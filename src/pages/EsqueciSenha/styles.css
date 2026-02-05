@@ -7,7 +7,7 @@
   --color-white: #ffffff;
 }
 
-/* Container da página */
+/* Container */
 .forgot-container {
   min-height: 100vh;
   display: flex;
@@ -55,7 +55,7 @@
   padding: 40px;
 }
 
-/* Lado Esquerdo (Igual ao Login) */
+/* Lado Esquerdo ( ao Login) */
 .forgot-left {
   flex: 1;
   max-width: 500px;

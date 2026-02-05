@@ -26,7 +26,6 @@ const ModalQRCode = ({ isOpen, onClose, qrValue, nomeEvento }) => {
       <div className="modal-container">
         <h3>QR Code: {nomeEvento}</h3>
         
-        {/* Container que será capturado para a imagem */}
         <div ref={qrRef} className="qr-display-area" style={{ background: 'white', padding: '20px' }}>
           <QRCode value={qrValue} size={200} />
         </div>

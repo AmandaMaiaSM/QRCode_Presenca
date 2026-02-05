@@ -49,36 +49,39 @@ export default function MeusEvent() {
   // Estados para controlar o Modal (Janela de Participantes)
   const [modalAberto, setModalAberto] = useState(false);
   const [eventoSelecionado, setEventoSelecionado] = useState(null);
+
   // Estados para controlar o Modal de Exclusão
   const [modalExcluirAberto, setModalExcluirAberto] = useState(false);
   const [idParaExcluir, setIdParaExcluir] = useState(null);
+
   // Estados para controlar o Modal de Edição
   const [modalEditarAberto, setModalEditarAberto] = useState(false);
   const [dadosEdicao, setDadosEdicao] = useState({ id: null, nome: '', data: '' });
+
   // Estados para controlar o Modal de QR Code
   const [modalQrAberto, setModalQrAberto] = useState(false);
   const [qrValueSelecionado, setQrValueSelecionado] = useState("");
   const [nomeEventoQr, setNomeEventoQr] = useState("");
 
   // --- FUNÇÕES ---
-  // 1. Abre o modal de edição e preenche os dados
+  
   const handleAbrirEdicao = (evento) => {
-    // Preenche o estado com os dados do evento clicado
+    
     setDadosEdicao({ 
       id: evento.id, 
       nome: evento.nome, 
       data: evento.data 
     });
-    // Abre o modal de edição correto
+  
     setModalEditarAberto(true); 
   };
-// 1. Apenas abre o modal e guarda o ID
+
   const handleAbrirConfirmacao = (id) => {
     setIdParaExcluir(id);
     setModalExcluirAberto(true);
   };
 
-  // 2. Executa a exclusão de fato quando clicar no botão do Modal
+  
   const confirmarExclusao = () => {
     const novaLista = eventos.filter(evento => evento.id !== idParaExcluir);
     setEventos(novaLista);
@@ -86,19 +89,20 @@ export default function MeusEvent() {
     setIdParaExcluir(null);
   };
 
-  // 2. Abrir Modal de Presença
+  
   const handleVerPresenca = (evento) => {
     setEventoSelecionado(evento);
     setModalAberto(true);
   };
 
-  // 3. Fechar Modal
+  
   const fecharModal = () => {
     setModalAberto(false);
     setEventoSelecionado(null);
   };
-  // Salvar edição do evento
-const salvarEdicao = () => {
+
+  
+  const salvarEdicao = () => {
   const listaAtualizada = eventos.map(ev => 
     ev.id === dadosEdicao.id ? { ...ev, nome: dadosEdicao.nome, data: dadosEdicao.data } : ev
   );
@@ -106,7 +110,6 @@ const salvarEdicao = () => {
   setModalEditarAberto(false);
 };
 
-// Ver QR Code do evento salvo
 const handleVerQRCode = (evento) => {
   setQrValueSelecionado(evento.qrCodeValue);
   setNomeEventoQr(evento.nome);
@@ -234,6 +237,7 @@ const handleVerQRCode = (evento) => {
             </div>
           </div>
         )}
+        
         {/* --- MODAL DE CONFIRMAÇÃO DE EXCLUSÃO --- */}
         <ModalConfirmacao 
           isOpen={modalExcluirAberto}

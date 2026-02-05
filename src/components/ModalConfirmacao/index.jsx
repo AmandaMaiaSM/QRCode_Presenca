@@ -1,9 +1,8 @@
 import React from 'react';
 import './styles.css';
 
-// Recebemos funções via props para fechar ou confirmar
 const ModalConfirmacao = ({ isOpen, onClose, onConfirm, mensagem }) => {
-  if (!isOpen) return null; // Se não estiver aberto, não renderiza nada
+  if (!isOpen) return null; 
 
   return (
     <div className="modal-overlay">

@@ -1,13 +1,12 @@
-/* Isso precisa estar no CSS da PÁGINA, não só dentro do componente Sidebar */
 .dashboard-container {
-  display: flex; /* Isso faz a sidebar ficar ao lado do main */
+  display: flex; 
   height: 100vh;
   background-color: var(--color-bg);
   overflow: hidden;
 }
 
 .main-content {
-  flex: 1; /* Ocupa o resto do espaço */
+  flex: 1; 
   padding: 30px 40px;
   overflow-y: auto;
 }
@@ -16,14 +15,14 @@
   background-color: white;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-  overflow-x: auto; /* Permite rolar horizontalmente no celular */
+  overflow-x: auto; 
   padding: 20px;
 }
 
 .events-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px; /* Garante tamanho mínimo */
+  min-width: 600px; 
 }
 
 .events-table th {
@@ -101,7 +100,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro transparente */
+  background-color: rgba(0, 0, 0, 0.5); 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -147,7 +146,7 @@
 
 .modal-body {
   padding: 20px;
-  max-height: 60vh; /* Se tiver muita gente, cria rolagem */
+  max-height: 60vh; 
   overflow-y: auto;
 }
 

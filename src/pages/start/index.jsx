@@ -55,7 +55,7 @@ export function MainPage() {
 
       {/* FOOTER */}
       <footer className="footer">
-        © 2024 Sefaz - MA centro de treinamento. Todos os direitos reservados.
+        © 2026 Sefaz - MA centro de treinamento. Todos os direitos reservados.
       </footer>
 
     </div>

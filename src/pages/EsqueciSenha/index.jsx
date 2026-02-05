@@ -15,7 +15,7 @@ export default function EsqueciSenha() {
   return (
     <div className="forgot-container">
       
-      {/* HEADER - Botão de Voltar para o Login */}
+      {/* HEADER */}
       <div className="Cabecalho">
         <header className="header">
            <div style={{flex: 1}}></div> 

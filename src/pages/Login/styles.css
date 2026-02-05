@@ -11,7 +11,7 @@
 .login-container {
   min-height: 100vh;
   display: flex;
-  flex-direction: column; /* MUDEI PARA COLUMN: Header em cima, card embaixo */
+  flex-direction: column; 
   background-color: var(--color-bg);
 }
 
@@ -19,7 +19,7 @@
 .Cabecalho {
   width: 100%;
   background-color: transparent;
-  /* Removi height: 100vh que estava quebrando o layout */
+  
 }
 
 .header {
@@ -27,8 +27,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Joga o botão para a direita */
-  padding: 0 60px; /* Padding lateral */
+  justify-content: flex-end; 
+  padding: 0 60px;
 }
 
 .btn-header {
@@ -47,20 +47,16 @@
   color: white;
 }
 
-/* NOVO: Container do cartão de login (Esquerda + Direita) */
 .login-card {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: stretch; /* Garante altura igual */
+  align-items: stretch;
   
-  /* Centraliza o card na tela */
   flex: 1;
   padding: 40px;
-  gap: 0; /* Removido gap visual para unir as bordas se quiser */
+  gap: 0; 
 }
-
-
 
 /* Lado esquerdo */
 .login-left {
@@ -76,7 +72,7 @@
   justify-content: center;
   
   min-height: 550px;
-  border-radius: 20px 0 0 20px; /* Arredonda só a esquerda */
+  border-radius: 20px 0 0 20px;
 }
 
 .login-logo {
@@ -124,7 +120,7 @@
   justify-content: center;
   
   min-height: 550px;
-  border-radius: 0 20px 20px 0; /* Arredonda só a direita */
+  border-radius: 0 20px 20px 0; 
 }
 
 .login-right h2 {
@@ -169,7 +165,7 @@
 }
 
 .remember {
-  flex-direction: row !important; /* Força linha para checkbox */
+  flex-direction: row !important; 
   align-items: center;
   gap: 6px;
   margin-bottom: 0 !important;
@@ -241,7 +237,7 @@
 
   .login-left, .login-right {
     max-width: 100%;
-    border-radius: 20px; /* Volta a arredondar tudo quando empilha */
+    border-radius: 20px; 
     min-height: auto;
   }
   
