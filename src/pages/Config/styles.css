@@ -7,7 +7,7 @@
 }
 
 .main-content {
-  flex: 1; /* Ocupa o resto do espaço */
+  flex: 1; 
   padding: 30px 40px;
   overflow-y: auto;
 }
@@ -127,7 +127,7 @@
   margin: 0;
 }
 
-/* CSS Mágico do Switch */
+/* CSS Switch */
 .switch {
   position: relative;
   display: inline-block;
