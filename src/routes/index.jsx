@@ -8,6 +8,7 @@ import Config from "../pages/Config";
 import Login from "../pages/Login";
 import { MainPage } from "../pages/start";
 import EsqueciSenha from "../pages/EsqueciSenha";
+import RegistrarPresencas from "../pages/RegistrarPresencas";
 
 export default function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ export default function AppRoutes() {
       <Route path="/eventos/novo" element={<CreateEvent />} />
       <Route path="/checkin/:id" element={<CheckInPublic />} />
       <Route path="/config/:eventId" element={<Config />} />
+      <Route path="/registrar-presencas" element={<RegistrarPresencas />} />
 
       <Route path="/esqueci-senha" element={<EsqueciSenha />} />
       <Route path="*" element={<div>404 - Página não encontrada</div>} />
