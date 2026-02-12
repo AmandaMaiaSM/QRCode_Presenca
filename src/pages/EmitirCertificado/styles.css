@@ -1,0 +1,184 @@
+.emitir-certificado-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw; 
+    background-color: var(--color-bg, #f4f7f6);
+    overflow: hidden;
+}
+/* Área de Conteúdo */
+.emitir-certificado-main {
+    flex: 1; 
+    padding: 40px; 
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}   
+/* Cabeçalho da Página */
+.page-header h1 {
+    color: var(--color-primary, #333);
+    margin-bottom: 8px;
+}
+
+.form-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    max-width: 700px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.form-group select {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1.5px solid #e1e1e1;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+/* Estilização do Upload */
+.file-upload-wrapper {
+    border: 2px dashed #cbd5e0;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #f8fafc;
+}
+
+.file-hint {
+    font-size: 0.85rem;
+    color: #718096;
+    margin-top: 10px;
+}
+
+.info-box {
+    background-color: #ebf8ff;
+    border-left: 4px solid #4299e1;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+}
+
+.info-box p {
+    margin: 0;
+    color: #2c5282;
+    font-size: 0.9rem;
+}
+
+/* Botão de Gerar PDF */
+.btn-emitir {
+    color: white;
+    border: none;
+    padding-inline: 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.1rem;
+    transition: background 0.2s;
+}
+
+.btn-emitir:hover {
+        filter: brightness(0.9);
+}
+
+//botaoes de editar e excluir
+/* Ações (Botões) */
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btn-action {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 13px;
+}
+
+.btn-action.view {
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 500;
+}
+
+.btn-action.edit {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.btn-action.delete {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+
+.btn-action:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+img.btnImg {
+    width: 20px;
+    height: 20px;
+}
+
+//tabela de visualização:
+.preview-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    }
+
+.participantes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.participantes-table th, .participantes-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+
+.btn-emitir:hover {
+    background-color: var;
+}
+// cor da letra do certificado 
+.color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px;
+    width: fit-content;
+}
+
+.color-input {
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background: none;
+}
+

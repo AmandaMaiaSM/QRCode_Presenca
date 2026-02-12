@@ -8,6 +8,7 @@ import butCreatEventos from "../../assets/mais.png";
 import butDashboard from "../../assets/painel-de-controle.png";
 import menuImg from "../../assets/menu.png";
 import butRegistrarPresencas from "../../assets/Registrar-Presencas.png";
+import butEmitirCertificado from "../../assets/certificado.png";
 import "./styles.css";
 
 export default function Sidebar() {
@@ -53,6 +54,11 @@ export default function Sidebar() {
             <img src={butRegistrarPresencas} alt="Registrar Presenças" className="menu-icon-nav"/>
             <span className={!menuAberto ? "escondido" : ""}>Registrar Presenças</span>
         </button> 
+        
+        <button className={isActive("/emitir-certificado")} onClick={() => navigate("/emitir-certificado")}>
+            <img src={butEmitirCertificado} alt="Emitir Certificados" className="menu-icon-nav"/>
+            <span className={!menuAberto ? "escondido" : ""}>Emitir Certificados</span>
+        </button>
       
         <button className={isActive("/config/1")} onClick={() => navigate("/config/1")}>
           <img src={butLogout} alt="Configurações" className="menu-icon-nav"/>

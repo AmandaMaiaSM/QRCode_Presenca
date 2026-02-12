@@ -1,0 +1,199 @@
+import React, { useState, useRef } from "react";
+import Sidebar from "../../components/Sidebar";
+import { jsPDF } from "jspdf";
+import "./styles.css";
+
+import btdawonlod from "../../assets/download-direto.png";
+
+
+export default function EmitirCertificado() {
+  const [selectedEvento, setSelectedEvento] = useState("");
+  const [file, setFile] = useState(null);
+  const [textColor, setTextColor] = useState("#FFFFFF"); // branco padrão
+  const canvasRef = useRef(null);
+
+  // Lista de participantes (exemplo)
+  const listaParticipantes = [
+    { nome: "Amanda Maia", email: "amanda@email.com" },
+    { nome: "João Silva", email: "joao@email.com" }
+  ];
+
+  const handleFileChange = (e) => {
+    const uploadedFile = e.target.files[0];
+    if (uploadedFile) {
+      setFile(URL.createObjectURL(uploadedFile));
+    }
+  };
+
+  const gerarPDF = (nomeParticipante) => {
+    if (!file) {
+      alert("Por favor, anexe um modelo primeiro.");
+      return;
+    }
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.src = file;
+
+    img.onload = () => {
+      // Ajusta canvas ao tamanho real da imagem
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      // Desenha o fundo do certificado
+      ctx.drawImage(img, 0, 0);
+
+      // Estilo do nome
+      ctx.font = "bold 70px Georgia";
+      ctx.fillStyle = textColor;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      // Sombra suave (opcional, mas fica bonito)
+      ctx.shadowColor = "rgba(0,0,0,0.3)";
+      ctx.shadowBlur = 4;
+      ctx.shadowOffsetX = 2;
+      ctx.shadowOffsetY = 2;
+
+      // Posição do nome (ajustada ao layout do certificado)
+      ctx.fillText(
+        nomeParticipante,
+        canvas.width / 2,
+        canvas.height / 2 - 40
+      );
+
+      // Criação do PDF
+      const pdf = new jsPDF({
+        orientation: "landscape",
+        unit: "px",
+        format: [canvas.width, canvas.height]
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+      pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+      pdf.save(`Certificado_${nomeParticipante.replace(/\s/g, "_")}.pdf`);
+    };
+  };
+
+  const handleEmitirTodos = (e) => {
+    e.preventDefault();
+
+    if (!selectedEvento || !file) {
+      alert("Selecione o evento e o modelo antes de continuar.");
+      return;
+    }
+
+    alert("Função de geração em lote pode ser implementada aqui ");
+  };
+
+  return (
+    <div className="emitir-certificado-container">
+      <Sidebar />
+
+      <main className="emitir-certificado-main">
+        <header className="page-header">
+          <h1>Emitir Certificado</h1>
+          <p>Selecione o evento e gere certificados em PDF.</p>
+        </header>
+
+        {/* Canvas oculto */}
+        <canvas ref={canvasRef} style={{ display: "none" }} />
+
+        <section className="form-section">
+          <form className="emitir-form" onSubmit={handleEmitirTodos}>
+
+            <div className="form-group">
+              <label>Evento:</label>
+              <select
+                value={selectedEvento}
+                onChange={(e) => setSelectedEvento(e.target.value)}
+                required
+              >
+                <option value="">Selecione um evento...</option>
+                <option value="evento1">Workshop de React - IEMA</option>
+                <option value="evento2">Palestra Inovação TIC</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Modelo do Certificado (PNG/JPG):</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Cor do nome no certificado:</label>
+              <input
+                type="color"
+                value={textColor}
+                onChange={(e) => setTextColor(e.target.value)}
+              />
+              <span style={{ marginLeft: "10px" }}>
+                {textColor.toUpperCase()}
+              </span>
+            </div>
+
+            {file && (
+              <div className="preview-section">
+                <h2>Lista de Participantes</h2>
+                <table className="participantes-table">
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th> Download</th>
+                      <th>Ação</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {listaParticipantes.map((p, index) => (
+                      <tr key={index}>
+                        <td>{p.nome}</td>
+                        <td>
+                          <button
+                            type="button"
+                            className="btn-action"
+                            onClick={() => gerarPDF(p.nome)}
+                          >
+                            <img  className="btnImg" src={btdawonlod} alt="Download" />
+                          </button>
+                        </td>
+
+                        <td>
+                          <button
+                            type="button"
+                            className="btn-action "
+                            onClick={() => gerarPDF(p.acao)}
+                          >
+                            ✏️
+                          </button>
+                          <button
+                            type="button"
+                            className="btn-action delete"
+                            onClick={() => gerarPDF(p.acao)}
+                            >   
+                            🗑
+                            </button>️
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            <button type="submit" className="btn-emitir">
+              Gerar Certificados em Lote
+            </button>
+
+          </form>
+        </section>
+      </main>
+    </div>
+  );
+}
