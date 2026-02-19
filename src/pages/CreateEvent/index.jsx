@@ -79,6 +79,7 @@ export default function CreateEvent() {
       <Sidebar /> 
       
       <main className="main-content">
+        
         <header className="page-header">
            <h1>Criar Novo Evento</h1>
            <p>Preencha os dados abaixo para gerar o QR Code de check-in.</p>

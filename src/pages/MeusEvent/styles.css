@@ -60,6 +60,7 @@
 .btn-action {
   border: none;
   padding: 6px 10px;
+  gap: 10px;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.2s;
@@ -146,7 +147,10 @@
 
 .modal-body {
   padding: 20px;
-  max-height: 60vh; 
+  max-height: 80vh;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   overflow-y: auto;
 }
 
@@ -162,6 +166,7 @@
   border-bottom: 1px solid #eee;
   font-size: 14px;
 }
+
 
 .attendees-table th {
   color: #666;
@@ -180,14 +185,20 @@
   border-top: 1px solid #eee;
 }
 
+// botao fechar e salvar 
 .btn-secondary {
-  background-color: #ddd;
+  background-color: #c9a416;
   border: none;
   padding: 8px 16px;
+  gap: 10px;
   border-radius: 6px;
   cursor: pointer;
   color: #333;
   font-weight: bold;
+}
+
+.btn-primary:hover {
+background-color: #a8a578;
 }
 
 /* Botão do QR Code  */
@@ -213,7 +224,34 @@
 
 .btn-action.qr:hover {
   transform: scale(1.15); 
-  opacity: 0.7;           
+  opacity: 0.7;  
+  color: var(--color-secondary);         
+}
+.btn-actionSalva {
+  background-color: #c9a416;
+  border: none;
+  gap: 10px;
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: white;
+}
+
+.btn-actionCAncelar {
+  background-color: #8d4820;
+  border: none;
+  gap: 10px;
+  padding: 6px 16px;
+  margin-left: 8px;
+  margin-top: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: white;
+}
+.btn-actionSalva:hover, .btn-actionCAncelar:hover {
+  background-color: #a8a578;
 }
 
 /* Barra de pesquisa */
@@ -239,4 +277,18 @@
 
 .search-bar input:focus {
   border-color: var(--color-primary);
+}
+
+//campo para editar nome do participante
+.EditarNome {
+  width: 220px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+participantes-table-body {
+  max-height: 100%;
+  overflow-y: auto;
+  display: block;
 }

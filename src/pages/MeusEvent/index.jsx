@@ -48,7 +48,50 @@ export default function MeusEvent() {
   const [qrValueSelecionado, setQrValueSelecionado] = useState("");
   const [nomeEventoQr, setNomeEventoQr] = useState("");
   const [termoPesquisa, setTermoPesquisa] = useState("");
-  const [modalDownloadAberto, setModalDownloadAberto] = useState(false);  
+  const [modalDownloadAberto, setModalDownloadAberto] = useState(false);
+  const [idParticipanteEditando, setIdParticipanteEditando] = useState(null);
+  const [novoNomeParticipante, setNovoNomeParticipante] = useState("");
+
+
+  // Estados para novo participante
+  const [novoParticipante, setNovoParticipante] = useState({ nome: "", email: "", hora: "" });
+  const [adicionarParticipanteAtivo, setAdicionarParticipanteAtivo] = useState(false);
+  // Adicionar participante ao evento selecionado
+  const handleAdicionarParticipante = () => {
+    if (!novoParticipante.nome || !novoParticipante.email || !novoParticipante.hora) return;
+    const novoId = Date.now();
+    setEventos(prevEventos => prevEventos.map(ev => {
+      if (ev.id === eventoSelecionado.id) {
+        return {
+          ...ev,
+          participantes: [
+            ...ev.participantes,
+            { id: novoId, ...novoParticipante }
+          ]
+        };
+      }
+      return ev;
+    }));
+    setEventoSelecionado(ev => ({
+      ...ev,
+      participantes: [
+        ...ev.participantes,
+        { id: novoId, ...novoParticipante }
+      ]
+    }));
+    setNovoParticipante({ nome: "", email: "", hora: "" });
+    setAdicionarParticipanteAtivo(false);
+  };
+
+  const handleAbrirAdicionarParticipante = (pessoa) => {
+    setNovoParticipante(pessoa ? { nome: pessoa.nome, email: pessoa.email, hora: pessoa.hora } : { nome: "", email: "", hora: "" });
+    setAdicionarParticipanteAtivo(true);
+  };
+
+  const handleCancelarAdicionarParticipante = () => {
+    setAdicionarParticipanteAtivo(false);
+    setNovoParticipante({ nome: "", email: "", hora: "" });
+  };
 
 
   // --- EFEITOS ---
@@ -99,9 +142,63 @@ export default function MeusEvent() {
     setModalEditarAberto(false);
   };
 
+  //modal de ModalDanload para baixar a lista de presença do evento selecionado
   const handleVerPresenca = (evento) => {
     setEventoSelecionado(evento);
     setModalAberto(true);
+    setIdParticipanteEditando(null);
+    setNovoNomeParticipante("");
+  };
+
+  // Excluir participante
+  const handleExcluirParticipante = (idParticipante) => {
+    setEventos(prevEventos => prevEventos.map(ev => {
+      if (ev.id === eventoSelecionado.id) {
+        return {
+          ...ev,
+          participantes: ev.participantes.filter(p => p.id !== idParticipante)
+        };
+      }
+      return ev;
+    }));
+    // Atualiza o evento selecionado para refletir a exclusão
+    setEventoSelecionado(ev => ({
+      ...ev,
+      participantes: ev.participantes.filter(p => p.id !== idParticipante)
+    }));
+  };
+
+  // Editar nome do participante
+  const handleEditarParticipante = (idParticipante, nomeAtual) => {
+    setIdParticipanteEditando(idParticipante);
+    setNovoNomeParticipante(nomeAtual);
+  };
+
+  const handleSalvarNomeParticipante = (idParticipante) => {
+    setEventos(prevEventos => prevEventos.map(ev => {
+      if (ev.id === eventoSelecionado.id) {
+        return {
+          ...ev,
+          participantes: ev.participantes.map(p =>
+            p.id === idParticipante ? { ...p, nome: novoNomeParticipante } : p
+          )
+        };
+      }
+      return ev;
+    }));
+    setEventoSelecionado(ev => ({
+      ...ev,
+      participantes: ev.participantes.map(p =>
+        p.id === idParticipante ? { ...p, nome: novoNomeParticipante } : p
+      )
+    }));
+    setIdParticipanteEditando(null);
+    setNovoNomeParticipante("");
+  };
+
+  const handleCancelarEdicaoParticipante = () => {
+    setIdParticipanteEditando(null);
+    setNovoNomeParticipante("");
   };
 
   const handleVerQRCode = (evento) => {
@@ -177,9 +274,7 @@ export default function MeusEvent() {
           {eventosFiltrados.length === 0 && (
             <p className="empty-state">Nenhum evento encontrado para sua busca.</p>
           )}
-        </div>
-
-        {/* --- MODAIS --- */}
+        </div> 
         
         {/* Modal de Lista de Presença */}
         {modalAberto && eventoSelecionado && (
@@ -190,31 +285,82 @@ export default function MeusEvent() {
                 <button className="btn-close" onClick={() => setModalAberto(false)}>✖</button>
               </div>
               <div className="modal-body">
-                {eventoSelecionado.participantes.length > 0 ? (
-                  <table className="attendees-table">
-                    <thead>
-                      <tr>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>Hora Check-in</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {eventoSelecionado.participantes.map((pessoa) => (
-                        <tr key={pessoa.id}>
-                          <td>{pessoa.nome}</td>
-                          <td>{pessoa.email}</td>
-                          <td>{pessoa.hora}</td>
+                <>
+                  {/* Formulário para adicionar participante (aparece só quando ativado) */}
+                  {adicionarParticipanteAtivo && (
+                    
+                    <div style={{ display: 'flex', gap: 8, marginBottom: 16, alignItems: 'center' }}>
+                      <input
+                        type="text"
+                        placeholder="Nome"
+                        value={novoParticipante.nome}
+                        onChange={e => setNovoParticipante({ ...novoParticipante, nome: e.target.value })}
+                        style={{ width: 120, padding: 6, borderRadius: 4, border: '1px solid #ccc' }}
+                      />
+                      <input
+                        type="email"
+                        placeholder="Email"
+                        value={novoParticipante.email}
+                        onChange={e => setNovoParticipante({ ...novoParticipante, email: e.target.value })}
+                        style={{ width: 160, padding: 6, borderRadius: 4, border: '1px solid #ccc' }}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Hora (ex: 08:00)"
+                        value={novoParticipante.hora}
+                        onChange={e => setNovoParticipante({ ...novoParticipante, hora: e.target.value })}
+                        style={{ width: 90, padding: 6, borderRadius: 4, border: '1px solid #ccc' }}
+                      />
+                      <button className="btn-actionSalva" onClick={handleAdicionarParticipante} style={{ fontWeight: 'bold', fontSize: 16 }}>Adicionar</button>
+                      <button className="btn-actionCAncelar" onClick={handleCancelarAdicionarParticipante} style={{ fontWeight: 'bold', fontSize: 16 }}>Cancelar</button>
+                    </div>
+                  )}
+                  {eventoSelecionado.participantes.length > 0 ? (
+                    <table className="attendees-table">
+                      <thead>
+                        <tr>
+                          <th>Nome</th>
+                          <th>Email</th>
+                          <th>Hora Check-in</th>
+                          <th>Ações</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <p className="empty-modal">Ninguém realizou check-in ainda.</p>
-                )}
+                      </thead>
+                      <tbody className="participantes-table-body">
+                        {eventoSelecionado.participantes.map((pessoa) => (
+                          <tr key={pessoa.id}>
+                            <td>
+                              {idParticipanteEditando === pessoa.id ? (
+                                <>
+                                  <input
+                                    className="EditarNome"
+                                    type="text"
+                                    value={novoNomeParticipante}
+                                    onChange={e => setNovoNomeParticipante(e.target.value)}
+                                  />
+                                  <button  className="btn-actionSalva" onClick={() => handleSalvarNomeParticipante(pessoa.id)} >Salvar</button>
+                                  <button className="btn-actionCAncelar" onClick={handleCancelarEdicaoParticipante}>Cancelar</button>
+                                </>
+                              ) : (
+                                pessoa.nome
+                              )}
+                            </td>
+                            <td>{pessoa.email}</td>
+                            <td>{pessoa.hora}</td>
+                            <td>
+                              <button className="btn-action" title= "Editar"  style={{marginLeft: 8}} onClick={() => handleEditarParticipante(pessoa.id, pessoa.nome)}>✏️</button>
+                              <button className="btn-action" title = "Adicionar" onClick={() => handleAbrirAdicionarParticipante(pessoa)}>➕</button>
+                              <button className="btn-action" title = "Excluir"  onClick={() => handleExcluirParticipante(pessoa.id)}>🗑️</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  ) : (
+                    <p className="empty-modal">Ninguém realizou check-in ainda.</p>
+                  )}
+                </>
               </div>
               <div className="modal-footer">
-                <button className="btn-secondary" onClick={() => setModalAberto(false)}>Fechar</button>
                 <button className="btn-primary" onClick={() => setModalDownloadAberto(true)}>Baixar Lista</button>
               </div>
             </div>

@@ -1,18 +1,28 @@
 /* Cabeçalho da página */
+/* 2. Cabeçalho */
 .page-header {
+  text-align: center;
   margin-bottom: 30px;
-  text-align: center; 
+  width: 90%;
+  max-width: 1000px;
 }
+
 
 .page-header h1 {
   color: var(--color-primary);
   font-size: 28px;
   margin-bottom: 5px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .page-header p {
   color: #666;
   font-size: 14px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* CONTAINER  */
