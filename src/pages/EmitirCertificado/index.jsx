@@ -12,9 +12,11 @@ export default function EmitirCertificado() {
   const [textColor, setTextColor] = useState("#FFFFFF"); // branco padrão
   const canvasRef = useRef(null);
 
-  // Lista de participantes (exemplo)
+  
+
+  // Lista de participantes  somente texste ou seja exemplo
   const listaParticipantes = [
-    { nome: "Amanda Maia", email: "amanda@email.com" },
+    { nome: "Amanda Maia SOARES SILVA", email: "amanda@email.com" },
     { nome: "João Silva", email: "joao@email.com" }
   ];
 
@@ -128,19 +130,26 @@ export default function EmitirCertificado() {
 
             <div className="form-group">
               <label>Cor do nome no certificado:</label>
-              <input
-                type="color"
-                value={textColor}
-                onChange={(e) => setTextColor(e.target.value)}
-              />
-              <span style={{ marginLeft: "10px" }}>
+              <div className="color-picker-group">
+                <input
+                  type="color"
+                  className="color-input"
+                  value={textColor}
+                  onChange={(e) => setTextColor(e.target.value)}
+                />
+              </div>
+              <span className="color-hex-text">
                 {textColor.toUpperCase()}
               </span>
             </div>
 
             {file && (
               <div className="preview-section">
-                <h2>Lista de Participantes</h2>
+                <div className="preview-header">
+                  <h2>Lista de Participantes</h2>
+                  <p>Estes são os nomes que serão gerados nos certificados.</p>
+
+                </div>
                 <table className="participantes-table">
                   <thead>
                     <tr>

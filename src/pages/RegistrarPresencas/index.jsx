@@ -3,17 +3,23 @@ import Sidebar from "../../components/Sidebar";
 import "./styles.css";
 
 export default function RegistrarPresencas() {
-  // Estado para armazenar a lista de participantes
   const [participantes, setParticipantes] = useState([
     { nome: "", email: "", telefone: "" }
   ]);
 
-  // Função para adicionar um novo conjunto de campos de participante
   const handleAddParticipante = () => {
     setParticipantes([...participantes, { nome: "", email: "", telefone: "" }]);
   };
 
-  // Função para atualizar os dados de um participante específico
+  // Função para remover um participante caso clicado sem querer
+  const handleRemoveParticipante = (index) => {
+    // Mantém pelo menos um formulário na tela
+    if (participantes.length > 1) {
+      const novosParticipantes = participantes.filter((_, i) => i !== index);
+      setParticipantes(novosParticipantes);
+    }
+  };
+
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
     const novosParticipantes = [...participantes];
@@ -24,8 +30,7 @@ export default function RegistrarPresencas() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Dados salvos:", participantes);
-    alert("Presenças registradas com sucesso! Redirecionando...");
-    // lógica de navegação/modal
+    alert("Presenças registradas com sucesso!");
   };
 
   return (
@@ -35,7 +40,7 @@ export default function RegistrarPresencas() {
       <main className="registrar-presencas-main">
         <header className="page-header">
           <h1>Registrar Presenças</h1>
-          <p>Aqui você pode registrar as presenças dos participantes manualmente.</p>
+          <p>Registre as presenças manualmente abaixo.</p>
         </header>
 
         <section className="form-section">
@@ -44,7 +49,7 @@ export default function RegistrarPresencas() {
             <div className="event-info">
               <h2>Informações do Evento</h2>
               <label htmlFor="evento">Nome do Evento:</label>
-              <input type="text" id="evento" name="evento" placeholder="Digite o nome do evento" required />
+              <input type="text" id="evento" name="evento" placeholder="Nome do evento" required />
               
               <div className="form-row">
                 <div>
@@ -58,50 +63,66 @@ export default function RegistrarPresencas() {
               </div>
             </div>
 
-            {/* Mapeamento dos participantes dinamicamente */}
             {participantes.map((participante, index) => (
-              <div key={index} className="participante-group">
-                <h2>Informações do Participante {index + 1}</h2>
+              <div key={index} className="participante-card">
+                <div className="participante-header">
+                  <h2>Participante {index + 1}</h2>
+                  {participantes.length > 1 && (
+                    <button 
+                      type="button" 
+                      className="btn-remove" 
+                      onClick={() => handleRemoveParticipante(index)}
+                      title="Remover este participante"
+                    >
+                      ✖
+                    </button>
+                  )}
+                </div>
                 
-                <label>Nome Completo:</label>
-                <input 
-                  type="text" 
-                  name="nome" 
-                  value={participante.nome}
-                  onChange={(e) => handleInputChange(index, e)}
-                  placeholder="Digite o nome completo" 
-                  required 
-                />
+                <div className="input-group">
+                  <label>Nome Completo:</label>
+                  <input 
+                    type="text" 
+                    name="nome" 
+                    value={participante.nome}
+                    onChange={(e) => handleInputChange(index, e)}
+                    placeholder="Digite o nome" 
+                    required 
+                  />
 
-                <label>Email:</label>
-                <input 
-                  type="email" 
-                  name="email" 
-                  value={participante.email}
-                  onChange={(e) => handleInputChange(index, e)}
-                  placeholder="Digite o email" 
-                  required 
-                />
+                  <label>Email:</label>
+                  <input 
+                    type="email" 
+                    name="email" 
+                    value={participante.email}
+                    onChange={(e) => handleInputChange(index, e)}
+                    placeholder="exemplo@email.com" 
+                    required 
+                  />
 
-                <label>Telefone:</label>
-                <input 
-                  type="tel" 
-                  name="telefone" 
-                  value={participante.telefone}
-                  onChange={(e) => handleInputChange(index, e)}
-                  placeholder="Digite o telefone" 
-                  required 
-                />
+                  <label>Telefone:</label>
+                  <input 
+                    type="tel" 
+                    name="telefone" 
+                    value={participante.telefone}
+                    onChange={(e) => handleInputChange(index, e)}
+                    placeholder="(00) 00000-0000" 
+                    required 
+                  />
+                </div>
               </div>
             ))}
 
-            <button type="button" className="btn-add" onClick={handleAddParticipante}>
-              + Adicionar Outro Participante
-            </button>
+            {/* Container de Botões Inferiores */}
+            <div className="form-actions">
+              <button type="button" className="btn-add" onClick={handleAddParticipante}>
+                + Adicionar Outro Participante
+              </button>
 
-            <button type="submit" className="btn-save">
-              Salvar Lista de Presença
-            </button>
+              <button type="submit" className="btn-save">
+                Salvar Lista de Presença
+              </button>
+            </div>
           </form>
         </section>
       </main>
