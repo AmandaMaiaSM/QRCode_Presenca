@@ -17,11 +17,47 @@
   font-size: 1rem;
 }
 
-.btn-salvar {
-  background-color: #28a745; 
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+.btn-actionSalva, .btn-actionCAncelar {
+  padding: 6px 16px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: 0.2s;
+  color: white;
+  height: 36px;
+  font-size: 1rem;
+  line-height: 1.2;
+  //largura dos botões  min-width: 120px;
+  
+
+}
+
+
+/* Cores específicas */
+.btn-actionSalva {
+  background-color: #c9a416;
+}
+
+.btn-actionCAncelar {
+  background-color: #8d4820;
+}
+.btn-actionSalva:hover, .btn-actionCAncelar:hover {
+  background-color: #a8a578;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;      
+  gap: 12px;                
+  margin-top: 24px;         
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .modal-buttons {
+    flex-direction: column-reverse; 
+  }
+  .btn-actionSalva, .btn-actionCAncelar {
+    width: 100%;
+  }
 }

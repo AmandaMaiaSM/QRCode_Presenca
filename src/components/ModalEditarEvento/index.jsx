@@ -27,10 +27,9 @@ const ModalEditarEvento = ({ isOpen, onClose, onSave, dadosEdicao, setDadosEdica
           />
         </div>
 
-        <div className="modal-buttons">
-          <button className="btn-cancelar" onClick={onClose}>Cancelar</button>
-          <button className="btn-salvar" onClick={onSave}>Salvar Alterações</button>
-        </div>
+        <button className="btn-actionCAncelar" style={{margin: '10px'}} onClick={onClose}>Cancelar</button>
+        <button className="btn-actionSalva" onClick={onSave}>Salvar Alterações</button>
+
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import ModalQRCode from "../../components/ModalQRCode";
 import ModalConfirmacao from "../../components/ModalConfirmacao"; 
 import ModalEditarEvento from "../../components/ModalEditarEvento";
-import ModalDownload from "../../components/ModalDanload";
+import ModalDownload from "../../components/ModalDownload";
 import Sidebar from "../../components/Sidebar";
 import "./styles.css";
 
@@ -51,11 +51,10 @@ export default function MeusEvent() {
   const [modalDownloadAberto, setModalDownloadAberto] = useState(false);
   const [idParticipanteEditando, setIdParticipanteEditando] = useState(null);
   const [novoNomeParticipante, setNovoNomeParticipante] = useState("");
-
-
-  // Estados para novo participante
   const [novoParticipante, setNovoParticipante] = useState({ nome: "", email: "", hora: "" });
   const [adicionarParticipanteAtivo, setAdicionarParticipanteAtivo] = useState(false);
+  
+  
   // Adicionar participante ao evento selecionado
   const handleAdicionarParticipante = () => {
     if (!novoParticipante.nome || !novoParticipante.email || !novoParticipante.hora) return;
@@ -161,6 +160,7 @@ export default function MeusEvent() {
       }
       return ev;
     }));
+    
     // Atualiza o evento selecionado para refletir a exclusão
     setEventoSelecionado(ev => ({
       ...ev,
@@ -279,46 +279,58 @@ export default function MeusEvent() {
         {/* Modal de Lista de Presença */}
         {modalAberto && eventoSelecionado && (
           <div className="modal-overlay">
+
             <div className="modal-content">
+
               <div className="modal-header">
                 <h2>Presenças: {eventoSelecionado.nome}</h2>
                 <button className="btn-close" onClick={() => setModalAberto(false)}>✖</button>
               </div>
+
               <div className="modal-body">
                 <>
                   {/* Formulário para adicionar participante (aparece só quando ativado) */}
                   {adicionarParticipanteAtivo && (
                     
-                    <div style={{ display: 'flex', gap: 8, marginBottom: 16, alignItems: 'center' }}>
+                    <div className={`add-participante ${adicionarParticipanteAtivo ? 'ativo' : ''}`}>
+
+                      <h2>Novo Participante</h2>
+                      <br/>
+                      <label htmlFor="Nome">Nome:</label>
                       <input
                         type="text"
                         placeholder="Nome"
                         value={novoParticipante.nome}
                         onChange={e => setNovoParticipante({ ...novoParticipante, nome: e.target.value })}
-                        style={{ width: 120, padding: 6, borderRadius: 4, border: '1px solid #ccc' }}
+                        className="input-Add-participante"
                       />
+                      <label htmlFor="Email">Email:</label>
                       <input
                         type="email"
                         placeholder="Email"
                         value={novoParticipante.email}
                         onChange={e => setNovoParticipante({ ...novoParticipante, email: e.target.value })}
-                        style={{ width: 160, padding: 6, borderRadius: 4, border: '1px solid #ccc' }}
+                        className="input-Add-participante"
                       />
+                      <label htmlFor="Hora">Hora Check-in:</label>
                       <input
                         type="text"
                         placeholder="Hora (ex: 08:00)"
                         value={novoParticipante.hora}
                         onChange={e => setNovoParticipante({ ...novoParticipante, hora: e.target.value })}
-                        style={{ width: 90, padding: 6, borderRadius: 4, border: '1px solid #ccc' }}
+                        style={{ width: '10%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
                       />
-                      <button className="btn-actionSalva" onClick={handleAdicionarParticipante} style={{ fontWeight: 'bold', fontSize: 16 }}>Adicionar</button>
-                      <button className="btn-actionCAncelar" onClick={handleCancelarAdicionarParticipante} style={{ fontWeight: 'bold', fontSize: 16 }}>Cancelar</button>
+                  
+                      <div className="add-participante-actions">
+                        <button className="btn-actionSalva" onClick={handleAdicionarParticipante}>Adicionar</button>
+                        <button className="btn-actionCAncelar" onClick={handleCancelarAdicionarParticipante}>Cancelar</button>
+                      </div>
                     </div>
                   )}
                   {eventoSelecionado.participantes.length > 0 ? (
                     <table className="attendees-table">
                       <thead>
-                        <tr>
+                        <tr >
                           <th>Nome</th>
                           <th>Email</th>
                           <th>Hora Check-in</th>
@@ -337,6 +349,7 @@ export default function MeusEvent() {
                                     value={novoNomeParticipante}
                                     onChange={e => setNovoNomeParticipante(e.target.value)}
                                   />
+                                  <br/>
                                   <button  className="btn-actionSalva" onClick={() => handleSalvarNomeParticipante(pessoa.id)} >Salvar</button>
                                   <button className="btn-actionCAncelar" onClick={handleCancelarEdicaoParticipante}>Cancelar</button>
                                 </>

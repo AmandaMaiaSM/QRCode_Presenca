@@ -9,7 +9,7 @@ import btdawonlod from "../../assets/download-direto.png";
 export default function EmitirCertificado() {
   const [selectedEvento, setSelectedEvento] = useState("");
   const [file, setFile] = useState(null);
-  const [textColor, setTextColor] = useState("#FFFFFF"); // branco padrão
+  const [textColor, setTextColor] = useState("#FFFFFF"); 
   const canvasRef = useRef(null);
 
   
@@ -52,7 +52,7 @@ export default function EmitirCertificado() {
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      // Sombra suave (opcional, mas fica bonito)
+      // Sombra suave 
       ctx.shadowColor = "rgba(0,0,0,0.3)";
       ctx.shadowBlur = 4;
       ctx.shadowOffsetX = 2;
@@ -112,6 +112,7 @@ export default function EmitirCertificado() {
                 onChange={(e) => setSelectedEvento(e.target.value)}
                 required
               >
+                {/* Em um cenário real, esta lista seria carregada dinamicamente a partir de uma API ou banco de dados */}
                 <option value="">Selecione um evento...</option>
                 <option value="evento1">Workshop de React - IEMA</option>
                 <option value="evento2">Palestra Inovação TIC</option>
@@ -150,6 +151,7 @@ export default function EmitirCertificado() {
                   <p>Estes são os nomes que serão gerados nos certificados.</p>
 
                 </div>
+                
                 <table className="participantes-table">
                   <thead>
                     <tr>
