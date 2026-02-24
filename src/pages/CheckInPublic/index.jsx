@@ -1,16 +1,29 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom"; // Para pegar o ID do evento na URL
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./styles.css";
 
 export default function CheckInPublic() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [sucesso, setSucesso] = useState(false);
+  const [configEvento, setConfigEvento] = useState(null);
+  const [form, setForm] = useState({}); // Começa como objeto vazio
 
-  const [form, setForm] = useState({
-    nome: "",
-    email: "",
-    telefone: ""
-  });
+  // 1. Carrega o evento ao mudar o id
+  useEffect(() => {
+    const eventos = JSON.parse(localStorage.getItem('meus_eventos') || '[]');
+    const eventoEncontrado = eventos.find(e => e.id === id);
+    setConfigEvento(eventoEncontrado || null);
+  }, [id]);
+
+  // 2. Inicializa o form quando configEvento mudar
+  useEffect(() => {
+    if (!configEvento) return;
+    const initialForm = { nome: "", email: "", telefone: "" };
+    configEvento.camposPersonalizados?.forEach(campo => {
+      initialForm[campo.name] = "";
+    });
+    setForm(initialForm);
+  }, [configEvento]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -19,11 +32,10 @@ export default function CheckInPublic() {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    //  BANCO DE DADOS
-    console.log("Dados recebidos do evento:", id);
-    console.log("Participante:", form);
+    // Aqui você enviaria 'form' para o banco. 
+    // Ele já contém NOME, EMAIL, TELEFONE + CAMPOS EXTRAS.
+    console.log("Participante registrado no evento:", id, form);
 
-    // Se deu certo ou  o sucesso
     setSucesso(true);
   };
 
@@ -31,7 +43,6 @@ export default function CheckInPublic() {
     return (
       <div className="checkin-container success">
         <div className="success-card">
-          <div className="icon-check"></div>
           <h1>Presença Confirmada!</h1>
           <p>Obrigado, <strong>{form.nome}</strong>.</p>
           <p>Registrado com sucesso.</p>
@@ -40,51 +51,51 @@ export default function CheckInPublic() {
     );
   }
 
+  // Caso o evento não seja encontrado
+  if (!configEvento) {
+    return <div className="checkin-container">Evento não encontrado ou carregando...</div>;
+  }
+
   return (
     <div className="checkin-container">
       <div className="checkin-card">
         <header className="checkin-header">
           <h2>Bem-vindo(a)!</h2>
-          <p>Confirme sua presença no evento.</p>
-          <span className="event-id-badge">ID do Evento: {id}</span>
+          <p>Confirme sua presença em: <strong>{configEvento.nome}</strong></p>
+          <span className="event-id-badge">ID: {id}</span>
         </header>
 
         <form onSubmit={handleSubmit} className="checkin-form">
+          {/* --- CAMPOS PADRÃO --- */}
           <div className="form-group">
             <label>Nome Completo</label>
-            <input 
-              type="text" 
-              name="nome" 
-              placeholder="Digite seu nome" 
-              required 
-              value={form.nome}
-              onChange={handleChange}
-            />
+            <input type="text" name="nome" required value={form.nome || ""} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label>E-mail</label>
-            <input 
-              type="email" 
-              name="email" 
-              placeholder="seu@email.com" 
-              required 
-              value={form.email}
-              onChange={handleChange}
-            />
+            <input type="email" name="email" required value={form.email || ""} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label>Telefone / WhatsApp</label>
-            <input 
-              type="tel" 
-              name="telefone" 
-              placeholder="(xx) 9xxxx-xxxx" 
-              required 
-              value={form.telefone}
-              onChange={handleChange}
-            />
+            <input type="tel" name="telefone" required value={form.telefone || ""} onChange={handleChange} />
           </div>
+
+          {/* --- CAMPOS DINÂMICOS (O que faltava) --- */}
+          {configEvento.camposPersonalizados && configEvento.camposPersonalizados.map((campo) => (
+            <div className="form-group" key={campo.id}>
+              <label>{campo.label}</label>
+              <input 
+                type="text" 
+                name={campo.name} 
+                placeholder={`Digite seu ${campo.label}`}
+                required 
+                value={form[campo.name] || ""} 
+                onChange={handleChange} 
+              />
+            </div>
+          ))}
 
           <button type="submit" className="btn-confirm">
             CONFIRMAR PRESENÇA

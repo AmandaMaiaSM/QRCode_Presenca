@@ -259,3 +259,53 @@ input:focus {
     gap: 0;
   }
 }
+
+/*Campos adcionais */
+
+.dynamic-fields-section {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px dashed #ccc;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.field-tag {
+  background: #c9a416;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-tag button {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-add {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin-left: 10px;
+  max-width: 150px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+
+}
