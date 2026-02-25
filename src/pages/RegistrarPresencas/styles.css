@@ -125,17 +125,18 @@
 }
 
 .btn-add {
-    background-color: #8d4820; /* Cor secundária */
+    background-color: var(--color-accent); 
     color: #fff;
 }
 
 .btn-save {
-    background-color: #c9a416; /* Cor primária */
+    background-color: var(--color-primary); 
     color: #fff;
 }
 
 .btn-add:hover, .btn-save:hover {
-    background-color: var(--cor-apoio);
+    background-color: var(--color-secondary);
+
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(168, 165, 120, 0.3);
 }

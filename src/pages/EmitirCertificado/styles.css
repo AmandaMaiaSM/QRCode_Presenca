@@ -73,7 +73,7 @@
 .form-group select:focus,
 .form-group input[type="file"]:focus {
   outline: none;
-  border-color: #4299e1;
+  border-color: var(--color-primary);
   background-color: #fff;
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
 }

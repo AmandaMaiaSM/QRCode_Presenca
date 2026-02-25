@@ -116,7 +116,7 @@ export default function RegistrarPresencas() {
             {/* Container de Botões Inferiores */}
             <div className="form-actions">
               <button type="button" className="btn-add" onClick={handleAddParticipante}>
-                + Adicionar Outro Participante
+                Adicionar Participante
               </button>
 
               <button type="submit" className="btn-save">

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import QRCode from "react-qr-code"; 
-import { toPng } from "html-to-image"; 
+import { toPng } from "html-to-image";
+import { v4 as uuidv4 } from 'uuid'; 
 
 import ModalSucessoEvento from "../../components/ModalSucessoEvento";
 import Sidebar from "../../components/Sidebar";
@@ -10,13 +11,14 @@ export default function CreateEvent() {
   const qrCodeRef = useRef(null); 
 
   // --- ESTADOS ---
-  const [eventoId] = useState(() => `evt-${Date.now()}-${Math.floor(Math.random() * 1000)}`);
+  const [eventoId] = useState(() => `evt-${uuidv4()}`);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [form, setForm] = useState({
     name: "",
     date: "",
     time: "",
-    location: ""
+    location: "",
+    descricao: ""
   });
 
   // ESTADOS DOS CAMPOS DINÂMICOS (Movidos para o topo)
@@ -47,9 +49,11 @@ export default function CreateEvent() {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
 
     const novoEvento = {
       id: eventoId,
@@ -57,10 +61,14 @@ export default function CreateEvent() {
       data: form.date,
       hora: form.time,
       local: form.location,
-      qrCodeValue: qrValue,
-      camposPersonalizados: camposExtras, // Agora integrado!
+      descricao: form.descricao,
+      qrCodeValue: `${baseUrl}/checkin/${eventoId}`,
+      camposPersonalizados: camposExtras, 
       participantes: []
     };
+
+    // Exibe o ID do evento criado no console
+    console.log('Evento criado:', novoEvento);
 
     const eventosSalvos = JSON.parse(localStorage.getItem('meus_eventos') || '[]');
     localStorage.setItem('meus_eventos', JSON.stringify([...eventosSalvos, novoEvento]));
@@ -100,10 +108,16 @@ export default function CreateEvent() {
         <div className="content-wrapper">
           <section className="form-section">
             <form className="create-event-form" onSubmit={handleSubmit}>
+
               <div className="form-group">
                 <label htmlFor="name">Nome do Evento</label>
                 <input type="text" id="name" name="name" value={form.name} onChange={handleChange} required />
-              </div>  
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="descricao">Descrição do Evento</label>
+                <textarea id="descricao" name="descricao" value={form.descricao} onChange={handleChange} rows={3} placeholder="Digite uma descrição para o evento..." />
+              </div>
 
               <div className="form-row">
                 <div className="form-group">
@@ -115,11 +129,13 @@ export default function CreateEvent() {
                   <input type="time" id="time" name="time" value={form.time} onChange={handleChange} required />
                 </div>
               </div>
+              
 
               <div className="form-group">
                 <label htmlFor="location">Local</label>
                 <input type="text" id="location" name="location" value={form.location} onChange={handleChange} required />
               </div>  
+
 
               <hr />
               <h3 style={{fontSize: '16px', margin: '20px 0 10px'}}>Configuração do Check-in</h3>
