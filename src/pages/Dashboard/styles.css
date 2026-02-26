@@ -36,7 +36,7 @@
 /* ESTADO FECHADO */
 .sidebar.fechada {
   width: var(--sidebar-closed-width);
-  padding: 20px 10px; /* Ajuste para centralizar ícones */
+  padding: 20px 10px;
 }
 
 /* Header da Sidebar */
@@ -98,7 +98,7 @@
 
 /* SVG dentro do botão */
 .nav-item svg {
-  min-width: 24px; /* Garante que o ícone não suma/encolha */
+  min-width: 24px; 
 }
 
 .nav-item:hover {

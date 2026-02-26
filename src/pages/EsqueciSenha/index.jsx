@@ -1,15 +1,16 @@
 import React from "react";
 import "./styles.css";
-import qrCodeImg from "../../assets/QRcode02.png"; // Ajuste o caminho se necessário
+import qrCodeImg from "../../assets/QRcode02.png"; 
 import { useNavigate } from "react-router-dom";
 
 export default function EsqueciSenha() {
   const navigate = useNavigate();
 
+  // lógica de integração com o backend para envio do link de recuperação
   const handleRecuperar = (e) => {
     e.preventDefault();
     alert("Enviamos um link de recuperação para o seu e-mail!");
-    // Aqui entra a lógica de integração com o backend
+    
   };
 
   return (

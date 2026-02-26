@@ -1,6 +1,6 @@
-/* Isso precisa estar no CSS da PÁGINA, não só dentro do componente Sidebar */
+
 .dashboard-container {
-  display: flex; /* Isso faz a sidebar ficar ao lado do main */
+  display: flex; 
   height: 100vh;
   background-color: var(--color-bg);
   overflow: hidden;

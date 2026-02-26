@@ -173,9 +173,9 @@ export default function CreateEvent() {
             </form>
           </section>
 
-          {/* ASIDE PREVIEW (Manteve igual) */}
+          {/* ASIDE PREVIEW  */}
           <aside className="preview-section">
-            {/* ... seu código do ticket e QR Code ... */}
+            {/* código do ticket e QR Code ... */}
             <div className="event-card">
                <div className="card-header"><span>TICKET DE ACESSO</span></div>
                <div className="card-body">

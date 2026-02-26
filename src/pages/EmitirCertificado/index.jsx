@@ -112,7 +112,7 @@ export default function EmitirCertificado() {
                 onChange={(e) => setSelectedEvento(e.target.value)}
                 required
               >
-                {/* Em um cenário real, esta lista seria carregada dinamicamente a partir de uma API ou banco de dados */}
+                {/* lista que vai ser carregada dde uma API ou banco de dados */}
                 <option value="">Selecione um evento...</option>
                 <option value="evento1">Workshop de React - IEMA</option>
                 <option value="evento2">Palestra Inovação TIC</option>
